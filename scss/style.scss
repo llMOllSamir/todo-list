@@ -1,0 +1,354 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap");
+@import "./variables";
+@import "./placeholder";
+@import "./mixin";
+@import "./function";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: $mainFont;
+  border: none;
+  outline: none;
+  color: black;
+  text-decoration: none;
+  list-style: none;
+  text-transform: capitalize;
+}
+
+body {
+  background-color: $mainColor;
+  min-height: 100vh;
+  @include flexBetweenColumn();
+}
+
+header {
+  width: 100%;
+  height: 60px;
+  background-color: $editColor;
+  @include flexStart();
+  h1 {
+    text-transform: capitalize;
+    margin-inline: 2rem;
+    &::first-letter {
+      color: $dangerColor;
+      font-size: larger;
+      font-weight: 900;
+    }
+  }
+}
+
+#model {
+  position: fixed;
+  inset: 0;
+  background-color: rgba($color: #000000, $alpha: 0.4);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  &.flex {
+    display: flex;
+  }
+  .overlay {
+    width: 40%;
+    max-height: 100%;
+    min-height: 40%;
+    background-color: rgba($color: $mainColor, $alpha: 0.8);
+    @include shadow($mainColor);
+    & > div {
+      width: 100%;
+      height: 100%;
+      padding: 4rem;
+      position: relative;
+      @include flexStartColumn();
+      align-items: flex-start;
+      gap: 2rem;
+      h2 {
+        color: $dangerColor;
+        font-size: xx-large;
+        @media screen and (max-width: 500px) {
+          font-size: x-large;
+        }
+      }
+      p {
+        font-weight: 600;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        @media screen and (max-width: 500px) {
+          font-size: small;
+        }
+        &.completed {
+          background-color: rgba($color: $completedColor, $alpha: 0.6);
+        }
+        &.pending {
+          background-color: rgba($color: $pendingColor, $alpha: 0.6);
+        }
+        &.progress {
+          background-color: rgba($color: $progressColor, $alpha: 0.6);
+        }
+      }
+      & > div.btn-group {
+        width: 100%;
+        @include flexCenter();
+        padding: 0.5rem;
+        gap: 1rem;
+      }
+      button {
+        width: 50%;
+        padding: 0.5rem;
+        cursor: pointer;
+        background-color: rgba($color: $dangerColor, $alpha: 0.5);
+        transition: background-color 0.5s;
+        color: white;
+        font-weight: 600;
+        font-size: medium;
+        &:hover {
+          background-color: rgba($color: $dangerColor, $alpha: 0.9);
+        }
+        &[action="edit"] {
+          background-color: rgba($color: $editColor, $alpha: 0.8);
+        }
+        &[action="close"] {
+          width: fit-content;
+          position: absolute;
+          top: 0;
+          right: 0;
+        }
+      }
+    }
+    & > form {
+      width: 100%;
+      position: relative;
+      padding: 4rem;
+      @include flexCenterColumn();
+      gap: 1rem;
+      h2 {
+        color: $dangerColor;
+        font-size: xx-large;
+        margin-top: -2rem;
+        margin-bottom: 2rem;
+        @media screen and (max-width: 500px) {
+          font-size: x-large;
+          margin: 0;
+        }
+        &:after {
+          content: "";
+          display: block;
+          width: 100%;
+          height: 2px;
+          background-color: $dangerColor;
+        }
+      }
+      button {
+        padding: 0.5rem;
+        width: 50%;
+        cursor: pointer;
+        border-radius: 8rem;
+        background-color: rgba($color: $completedColor, $alpha: 0.5);
+        transition: background-color 0.3s;
+        color: white;
+        font-weight: 600;
+        font-size: medium;
+        &[action="close"] {
+          width: fit-content;
+          border-radius: 0;
+          position: absolute;
+          background-color: rgba($color: $dangerColor, $alpha: 0.5);
+          top: 0;
+          right: 0;
+          &:hover {
+            background-color: rgba($color: $dangerColor, $alpha: 0.9);
+          }
+        }
+        &:hover {
+          background-color: rgba($color: $completedColor, $alpha: 0.9);
+        }
+      }
+      label {
+        width: 80%;
+        padding: 0.5rem 1rem;
+        font-size: large;
+        font-weight: 600;
+        @include flexStartColumn();
+        align-items: flex-start;
+        gap: 0.5rem;
+        select {
+          width: 100%;
+          padding: 0.5rem 1rem;
+          font-size: large;
+          border-radius: 8px;
+          caret-color: $dangerColor;
+          cursor: pointer;
+          &:focus {
+            border: 2px solid $dangerColor;
+          }
+          & > option {
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+          }
+        }
+        input {
+          width: 100%;
+          padding: 0.5rem 1rem;
+          font-size: large;
+          border-radius: 8px;
+          caret-color: $dangerColor;
+          &:focus {
+            border: 2px solid $dangerColor;
+          }
+        }
+      }
+
+      @media screen and (max-width: 500px) {
+        padding: 1rem;
+      }
+    }
+    @media screen and (max-width: 1200px) {
+      width: 70%;
+    }
+    @media screen and (max-width: 1000px) {
+      width: 70%;
+    }
+    @media screen and (max-width: 768px) {
+      width: 90%;
+    }
+  }
+}
+main {
+  flex-grow: 1;
+  width: 100%;
+  @extend %grid;
+
+  section {
+    @include flexStartColumn();
+    min-height: 100%;
+    max-width: 100%;
+
+    max-height: 500px;
+    overflow: auto;
+    h4 {
+      text-align: center;
+      height: 100%;
+      width: 100%;
+      margin-block: 3rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: x-large;
+      @media screen and (max-width: 500px) {
+        font-size: medium;
+      }
+    }
+    table {
+      width: 90%;
+      margin-top: 1rem;
+      padding: 1rem;
+      border-collapse: collapse;
+      thead {
+        tr {
+          height: 3rem;
+        }
+      }
+      tBody {
+        tr {
+          width: 100%;
+          text-align: center;
+          height: 2.5rem;
+          border-bottom: 2px solid gray;
+          transition: all 0.3s;
+          button {
+            padding: 0.4rem 0.8rem;
+            border-radius: 8px;
+            margin-inline: 0.5rem;
+            margin-block: 0.5rem;
+            cursor: pointer;
+          }
+          button[action="edit"] {
+            background-color: $editColor;
+          }
+          button[action="delete"] {
+            background-color: $dangerColor;
+          }
+          &:hover {
+            background-color: rgba($color: gray, $alpha: 0.4);
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+  #form {
+    @include headline($dangerColor);
+    background-color: rgba($color: $dangerColor, $alpha: 0.4);
+    form {
+      width: 100%;
+      height: 100%;
+      @include flexCenterColumn();
+      input {
+        width: 80%;
+        padding: 0.5rem 2rem;
+        font-size: large;
+        border-radius: 8rem;
+        caret-color: $dangerColor;
+        &:focus {
+          border: 2px solid $dangerColor;
+        }
+        &[type="submit"] {
+          @include flexCenter();
+          padding: 0.8rem 0.5rem;
+          font-size: medium;
+          width: 30%;
+          background-color: $dangerColor;
+          color: white;
+          font-weight: 600;
+          cursor: pointer;
+          @media screen and (max-width: 500px) {
+            padding: 0.5rem;
+          }
+        }
+        @media screen and (max-width: 500px) {
+          font-size: small;
+        }
+      }
+      textarea {
+        width: 80%;
+        padding: 1rem;
+        font-size: large;
+        border-radius: 0.5rem;
+        caret-color: $dangerColor;
+        resize: none;
+        &:focus {
+          border: 2px solid $dangerColor;
+        }
+        @media screen and (max-width: 500px) {
+          font-size: small;
+        }
+      }
+    }
+  }
+  #pending {
+    @include headline($pendingColor);
+    background-color: rgba($color: $pendingColor, $alpha: 0.4);
+  }
+  #progress {
+    @include headline($progressColor);
+    background-color: rgba($color: $progressColor, $alpha: 0.4);
+  }
+  #completed {
+    @include headline($completedColor);
+    background-color: rgba($color: $completedColor, $alpha: 0.4);
+  }
+}
+
+footer {
+  width: 100%;
+  height: 60px;
+  background-color: $editColor;
+  @include flexCenter();
+  p {
+    font-weight: 600;
+    @media screen and (max-width: 500px) {
+      font-size: small;
+    }
+  }
+}

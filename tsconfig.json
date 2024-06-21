@@ -1,0 +1,6 @@
+{
+  "compilerOptions": {
+    "target": "ES2015", // Specify ECMAScript target version (closest to ES2010)
+    "module": "ESNext" // Specify module code generation
+  }
+}

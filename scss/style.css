@@ -1,0 +1,431 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap");
+main {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+}
+@media screen and (max-width: 768px) {
+  main {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto Serif", serif;
+  border: none;
+  outline: none;
+  color: black;
+  text-decoration: none;
+  list-style: none;
+  text-transform: capitalize;
+}
+
+body {
+  background-color: #ddd;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header {
+  width: 100%;
+  height: 60px;
+  background-color: gold;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+header h1 {
+  text-transform: capitalize;
+  margin-inline: 2rem;
+}
+header h1::first-letter {
+  color: crimson;
+  font-size: larger;
+  font-weight: 900;
+}
+
+#model {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+#model.flex {
+  display: flex;
+}
+#model .overlay {
+  width: 40%;
+  max-height: 100%;
+  min-height: 40%;
+  background-color: rgba(221, 221, 221, 0.8);
+  box-shadow: 0 1px 10px rgba(221, 221, 221, 0.8), 0 1px 2px #dddddd;
+}
+#model .overlay > div {
+  width: 100%;
+  height: 100%;
+  padding: 4rem;
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+}
+#model .overlay > div h2 {
+  color: crimson;
+  font-size: xx-large;
+}
+@media screen and (max-width: 500px) {
+  #model .overlay > div h2 {
+    font-size: x-large;
+  }
+}
+#model .overlay > div p {
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+}
+@media screen and (max-width: 500px) {
+  #model .overlay > div p {
+    font-size: small;
+  }
+}
+#model .overlay > div p.completed {
+  background-color: rgba(0, 128, 0, 0.6);
+}
+#model .overlay > div p.pending {
+  background-color: rgba(218, 165, 32, 0.6);
+}
+#model .overlay > div p.progress {
+  background-color: rgba(0, 0, 255, 0.6);
+}
+#model .overlay > div > div.btn-group {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+  gap: 1rem;
+}
+#model .overlay > div button {
+  width: 50%;
+  padding: 0.5rem;
+  cursor: pointer;
+  background-color: rgba(220, 20, 60, 0.5);
+  transition: background-color 0.5s;
+  color: white;
+  font-weight: 600;
+  font-size: medium;
+}
+#model .overlay > div button:hover {
+  background-color: rgba(220, 20, 60, 0.9);
+}
+#model .overlay > div button[action=edit] {
+  background-color: rgba(255, 215, 0, 0.8);
+}
+#model .overlay > div button[action=close] {
+  width: -moz-fit-content;
+  width: fit-content;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+#model .overlay > form {
+  width: 100%;
+  position: relative;
+  padding: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
+  gap: 1rem;
+}
+#model .overlay > form h2 {
+  color: crimson;
+  font-size: xx-large;
+  margin-top: -2rem;
+  margin-bottom: 2rem;
+}
+@media screen and (max-width: 500px) {
+  #model .overlay > form h2 {
+    font-size: x-large;
+    margin: 0;
+  }
+}
+#model .overlay > form h2:after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: crimson;
+}
+#model .overlay > form button {
+  padding: 0.5rem;
+  width: 50%;
+  cursor: pointer;
+  border-radius: 8rem;
+  background-color: rgba(0, 128, 0, 0.5);
+  transition: background-color 0.3s;
+  color: white;
+  font-weight: 600;
+  font-size: medium;
+}
+#model .overlay > form button[action=close] {
+  width: -moz-fit-content;
+  width: fit-content;
+  border-radius: 0;
+  position: absolute;
+  background-color: rgba(220, 20, 60, 0.5);
+  top: 0;
+  right: 0;
+}
+#model .overlay > form button[action=close]:hover {
+  background-color: rgba(220, 20, 60, 0.9);
+}
+#model .overlay > form button:hover {
+  background-color: rgba(0, 128, 0, 0.9);
+}
+#model .overlay > form label {
+  width: 80%;
+  padding: 0.5rem 1rem;
+  font-size: large;
+  font-weight: 600;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+#model .overlay > form label select {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  font-size: large;
+  border-radius: 8px;
+  caret-color: crimson;
+  cursor: pointer;
+}
+#model .overlay > form label select:focus {
+  border: 2px solid crimson;
+}
+#model .overlay > form label select > option {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+#model .overlay > form label input {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  font-size: large;
+  border-radius: 8px;
+  caret-color: crimson;
+}
+#model .overlay > form label input:focus {
+  border: 2px solid crimson;
+}
+@media screen and (max-width: 500px) {
+  #model .overlay > form {
+    padding: 1rem;
+  }
+}
+@media screen and (max-width: 1200px) {
+  #model .overlay {
+    width: 70%;
+  }
+}
+@media screen and (max-width: 1000px) {
+  #model .overlay {
+    width: 70%;
+  }
+}
+@media screen and (max-width: 768px) {
+  #model .overlay {
+    width: 90%;
+  }
+}
+
+main {
+  flex-grow: 1;
+  width: 100%;
+}
+main section {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100%;
+  max-width: 100%;
+  max-height: 500px;
+  overflow: auto;
+}
+main section h4 {
+  text-align: center;
+  height: 100%;
+  width: 100%;
+  margin-block: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: x-large;
+}
+@media screen and (max-width: 500px) {
+  main section h4 {
+    font-size: medium;
+  }
+}
+main section table {
+  width: 90%;
+  margin-top: 1rem;
+  padding: 1rem;
+  border-collapse: collapse;
+}
+main section table thead tr {
+  height: 3rem;
+}
+main section table tBody tr {
+  width: 100%;
+  text-align: center;
+  height: 2.5rem;
+  border-bottom: 2px solid gray;
+  transition: all 0.3s;
+}
+main section table tBody tr button {
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  margin-inline: 0.5rem;
+  margin-block: 0.5rem;
+  cursor: pointer;
+}
+main section table tBody tr button[action=edit] {
+  background-color: gold;
+}
+main section table tBody tr button[action=delete] {
+  background-color: crimson;
+}
+main section table tBody tr:hover {
+  background-color: rgba(128, 128, 128, 0.4);
+  cursor: pointer;
+}
+main #form {
+  background-color: rgba(220, 20, 60, 0.4);
+}
+main #form h2 {
+  background-color: crimson;
+  text-align: center;
+  width: 100%;
+  padding: 0.5rem;
+  box-shadow: 0 1px 10px rgba(220, 20, 60, 0.8), 0 1px 2px crimson;
+}
+main #form form {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
+}
+main #form form input {
+  width: 80%;
+  padding: 0.5rem 2rem;
+  font-size: large;
+  border-radius: 8rem;
+  caret-color: crimson;
+}
+main #form form input:focus {
+  border: 2px solid crimson;
+}
+main #form form input[type=submit] {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.8rem 0.5rem;
+  font-size: medium;
+  width: 30%;
+  background-color: crimson;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+@media screen and (max-width: 500px) {
+  main #form form input[type=submit] {
+    padding: 0.5rem;
+  }
+}
+@media screen and (max-width: 500px) {
+  main #form form input {
+    font-size: small;
+  }
+}
+main #form form textarea {
+  width: 80%;
+  padding: 1rem;
+  font-size: large;
+  border-radius: 0.5rem;
+  caret-color: crimson;
+  resize: none;
+}
+main #form form textarea:focus {
+  border: 2px solid crimson;
+}
+@media screen and (max-width: 500px) {
+  main #form form textarea {
+    font-size: small;
+  }
+}
+main #pending {
+  background-color: rgba(218, 165, 32, 0.4);
+}
+main #pending h2 {
+  background-color: goldenrod;
+  text-align: center;
+  width: 100%;
+  padding: 0.5rem;
+  box-shadow: 0 1px 10px rgba(218, 165, 32, 0.8), 0 1px 2px goldenrod;
+}
+main #progress {
+  background-color: rgba(0, 0, 255, 0.4);
+}
+main #progress h2 {
+  background-color: blue;
+  text-align: center;
+  width: 100%;
+  padding: 0.5rem;
+  box-shadow: 0 1px 10px rgba(0, 0, 255, 0.8), 0 1px 2px blue;
+}
+main #completed {
+  background-color: rgba(0, 128, 0, 0.4);
+}
+main #completed h2 {
+  background-color: green;
+  text-align: center;
+  width: 100%;
+  padding: 0.5rem;
+  box-shadow: 0 1px 10px rgba(0, 128, 0, 0.8), 0 1px 2px green;
+}
+
+footer {
+  width: 100%;
+  height: 60px;
+  background-color: gold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+footer p {
+  font-weight: 600;
+}
+@media screen and (max-width: 500px) {
+  footer p {
+    font-size: small;
+  }
+}/*# sourceMappingURL=style.css.map */

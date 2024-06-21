@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="./scss/style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>To-Do List</h1>
+    </header>
+    <div id="model">
+      <div class="overlay"></div>
+    </div>
+    <main>
+      <section id="form">
+        <h2>Add New Task</h2>
+        <form id="taskForm">
+          <input
+            required
+            name="title"
+            type="text"
+            placeholder="Enter Task Title"
+          />
+
+          <textarea
+            required
+            name="details"
+            id=""
+            rows="6"
+            placeholder="Enter Task Details"
+          ></textarea>
+          <input type="submit" value="Add Task" />
+        </form>
+      </section>
+      <section id="pending">
+        <h2>Pending</h2>
+        <h4>No Tasks To Do Now</h4>
+      </section>
+      <section id="progress">
+        <h2>In Progress</h2>
+        <h4>No Tasks To Do Now</h4>
+      </section>
+      <section id="completed">
+        <h2>Completed</h2>
+        <h4>No Tasks To Do Now</h4>
+      </section>
+    </main>
+    <footer>
+      <p>Copyright &copy; 2024 | All Rights Reserved To Mohamed Samir</p>
+    </footer>
+    <script src="./index.js"></script>
+  </body>
+</html>
